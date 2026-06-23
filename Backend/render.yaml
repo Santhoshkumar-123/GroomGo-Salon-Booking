@@ -18,4 +18,4 @@ services:
       - key: MAIL_FROM
         value: "GroomGo <santhosh5375kumar@gmail.com>"
       - key: FRONTEND_URL
-        value: https://groomgo.vercel.app,https://groomgo-salon-booking.vercel.app
+        value: https://groom-go-salon-booking.vercel.app
