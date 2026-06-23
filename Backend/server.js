@@ -6,23 +6,9 @@ const app = express();
 
 // ── Middleware ───────────────────────────────────────────
 app.use(cors({
-  origin: (origin, callback) => {
-    const allowed = [
-      'http://localhost:5173',
-      'http://localhost:3000',
-      'https://groom-go-salon-booking.vercel.app'
-    ]
-    // Allow requests with no origin (mobile apps, curl, Postman)
-    if (!origin) return callback(null, true)
-    // Allow any vercel.app subdomain
-    if (origin.endsWith('.vercel.app') || allowed.includes(origin)) {
-      return callback(null, true)
-    }
-    return callback(null, true) // allow all for now
-  },
+  origin: true,
   credentials: true
-}))
-app.options('*', cors()) // handle preflight requests;
+}));
 app.use(express.json());
 
 // ── Database (auto-creates & seeds on first run) ─────────
@@ -50,7 +36,7 @@ app.use((err, req, res, next) => {
 });
 
 // ── Start ─────────────────────────────────────────────────
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`✅ GroomGo server running on http://localhost:${PORT}`);
 });
