@@ -6,10 +6,8 @@ Backend/db/*.db
 Backend/db/*.db-shm
 Backend/db/*.db-wal
 
-# Environment
-.env
-.env.local
-.env.production
+# Environment — backend only (keep frontend .env for Vercel)
+Backend/.env
 
 # Build output
 Frontend/dist/

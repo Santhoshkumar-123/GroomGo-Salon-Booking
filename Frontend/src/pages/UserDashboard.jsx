@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FiScissors, FiCalendar, FiClock, FiPlus, FiLogOut, FiUser } from 'react-icons/fi'
+import { FiScissors, FiCalendar, FiClock, FiPlus, FiLogOut, FiUser, FiX } from 'react-icons/fi'
 import toast from 'react-hot-toast'
 import api from '../api'
 import { useAuth } from '../context/AuthContext'
@@ -44,6 +44,17 @@ export default function UserDashboard() {
       toast.error(err.response?.data?.message || 'Booking failed.')
     } finally {
       setLoading(false)
+    }
+  }
+
+  const cancelBooking = async (id) => {
+    if (!window.confirm('Cancel this booking?')) return
+    try {
+      await api.delete(`/bookings/${id}`)
+      toast.success('Booking cancelled. A confirmation email has been sent.')
+      fetchData()
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Cancellation failed.')
     }
   }
 
@@ -168,6 +179,12 @@ export default function UserDashboard() {
                     <div className="flex items-center gap-1.5 justify-end mt-1">
                       <FiClock size={13} /> {b.time}
                     </div>
+                    {b.status === 'pending' && (
+                      <button onClick={() => cancelBooking(b.id)}
+                        className="mt-3 flex items-center gap-1 text-xs text-red-500 hover:text-red-700 transition-colors ml-auto">
+                        <FiX size={13} /> Cancel
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

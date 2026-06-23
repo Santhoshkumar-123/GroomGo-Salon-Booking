@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: groomgo-backend
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: MAIL_USER
+        value: santhosh5375kumar@gmail.com
+      - key: MAIL_PASS
+        value: kjmirqkpupbiahkg
+      - key: MAIL_FROM
+        value: "GroomGo <santhosh5375kumar@gmail.com>"
+      - key: FRONTEND_URL
+        value: https://groomgo.vercel.app
